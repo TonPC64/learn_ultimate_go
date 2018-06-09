@@ -11,12 +11,25 @@ type MyType struct {
 }
 
 func main() {
-	myvalue := &MyType{Value1: 1, Value2: "ss"}
-	pointer := unsafe.Pointer(myvalue)
-	fmt.Printf("Addr: %v value1: %d value2: %s\n", pointer, myvalue.Value1, myvalue.Value2)
+	// myvalue := new(MyType)
+	// myvalue := &MyType{Value1: 1, Value2: "ss"}
 
-	changeMyValue(myvalue)
-	fmt.Printf("Addr: %v value1: %d value2: %s\n", pointer, myvalue.Value1, myvalue.Value2)
+	myMap := make(map[string]string)
+	myMap["ton"] = "ton"
+
+	pointer := unsafe.Pointer(&myMap)
+	fmt.Printf("Addr: %v value: %s\n", pointer, myMap["ton"])
+
+	changeMyMap(&myMap)
+	fmt.Printf("Addr: %v value: %s\n", pointer, myMap["ton"])
+}
+
+func changeMyMap(myMap *map[string]string) {
+	(*myMap)["ton"] = "tonton"
+
+	pointer := unsafe.Pointer(myMap)
+	fmt.Printf("Addr: %v value: %s\n", pointer, (*myMap)["ton"])
+
 }
 
 func changeMyValue(myvalue *MyType) {
