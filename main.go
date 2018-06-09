@@ -1,5 +1,7 @@
 package main
 
+// build with `go build gcflags "-m -m"`
+
 func main() {
 	user1 := createUser1()
 	user2 := createUser2()
