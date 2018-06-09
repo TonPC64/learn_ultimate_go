@@ -22,10 +22,10 @@ func createUser1() user {
 }
 
 func createUser2() *user { // ย้ายไป Heap หลังจาก run เสร็จ
-	User := &user{
+	User := user{
 		email: "b@b.com",
 		name:  "bb",
 	}
 	println("v2", &User)
-	return User
+	return &User
 }
