@@ -1,42 +1,31 @@
 package main
 
-import (
-	"fmt"
-	"unsafe"
-)
-
-type MyType struct {
-	Value1 int
-	Value2 string
-}
-
 func main() {
-	// myvalue := new(MyType)
-	// myvalue := &MyType{Value1: 1, Value2: "ss"}
+	user1 := createUser1()
+	user2 := createUser2()
 
-	myMap := make(map[string]string)
-	myMap["ton"] = "ton"
-
-	pointer := unsafe.Pointer(&myMap)
-	fmt.Printf("Addr: %v value: %s\n", pointer, myMap["ton"])
-
-	changeMyMap(&myMap)
-	fmt.Printf("Addr: %v value: %s\n", pointer, myMap["ton"])
+	println("u1", &user1, "u2", &user2)
 }
 
-func changeMyMap(myMap *map[string]string) {
-	(*myMap)["ton"] = "tonton"
-
-	pointer := unsafe.Pointer(myMap)
-	fmt.Printf("Addr: %v value: %s\n", pointer, (*myMap)["ton"])
-
+type user struct {
+	name  string
+	email string
 }
 
-func changeMyValue(myvalue *MyType) {
-	myvalue.Value1 = 20
-	myvalue.Value2 = "ton"
+func createUser1() user {
+	User := user{
+		email: "a@a.com",
+		name:  "aa",
+	}
+	println("v1", &User)
+	return User
+}
 
-	pointer := unsafe.Pointer(myvalue)
-	fmt.Printf("Addr: %v value1: %d value2: %s\n", pointer, myvalue.Value1, myvalue.Value2)
-
+func createUser2() *user {
+	User := user{
+		email: "b@b.com",
+		name:  "bb",
+	}
+	println("v2", &User)
+	return &User
 }
